@@ -5,9 +5,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Yajra\Datatables\Datatables;
 use App\Models\Declares\ReportAll;
+use App\Models\Declares\ReportAllInput;
 use Auth;
 use Session;
 use DB;
+use Carbon;
 class ReportAllController extends Controller
 {
     /**
@@ -29,23 +31,29 @@ class ReportAllController extends Controller
 
       return view('declare.report_all.index', compact('group1', 'group2'));
     }
+
+
+
     public function Get_Report_All()
     {
      // return Datatables::of(item_code::query())->make(true);
-     $Report_All = ReportAll::select();
+     //$Report_All = ReportAll::select();
+     $company_id =Session::get('company_id');
+     $query =  "select t1.id, t1.name_content, t2.quantity, t1.update_date from hv_report_all t1
+                    left join hv_report_input t2 on t2.report_all_id = t1.id
+                    where t1.company_id = $company_id";
+    $Report_All = DB::select($query);
 
      return Datatables::of($Report_All)
-     ->addColumn('action', function($Report_All){
-         return '<a href="#" class="edit" id="'.$Report_All->id.'"><i class="fa far fa-edit"></i> Sửa</a>
-          <a href="#" class="delete" id="'.$Report_All->id.'"><i class="fa fa-trash"></i> Xóa</a>';
-     })
-     ->addColumn('name', function($Report_All){
-      return '<span class="label label-info">'.$Report_All->name.'</span>'.' - '.'<i>'.$Report_All->description.'</i>';
+
+     ->addColumn('name_content', function($Report_All){
+      return '<span class="label label-info">'.$Report_All->name_content.'</span>';
    })
-   ->addColumn('name_delete', function($Class_){
-     return $Class_->name;
+   ->addColumn('quantity', function($Report_All){
+    return '<input type="text" class="quantity" id="'."quantity".$Report_All->id.'" name="quantity" value="'.$Report_All->quantity.'" />';
  })
-     ->rawColumns(['action','name_delete'])
+
+     ->rawColumns(['name_content','quantity'])
      ->editColumn('id', '{{$id}}')
      ->setRowId('id')
      ->make(true);
@@ -53,70 +61,40 @@ class ReportAllController extends Controller
 
     function AddData(Request $request)
     {
-
-
-          //  print_r($input);die;
-            if( $input['button_action'] == 'insert')
-            {
-                $Report_All = new ReportAll([
-                    'name_content'   =>  $input['name_content'],
-                    'parent_id'      =>  $group,
+        //    print_r($request->all());die;
+        $input = $request->all();
+              $query  = ReportAllInput::where('report_all_id',$input['id'])
+              ->where('user_id', Auth::user()->id)
+              ->where('month', date('m').'-'.date('Y'))
+              ->first();
+ //print_r($query);die;
+              if(!isset($query)){
+                $ReportAllInput = new ReportAllInput([
+                    'user_id'        =>  Auth::user()->id,
+                    'report_all_id'  =>  $input['id'],
+                    'quantity'       =>  $input['value'],
+                    'month'          =>  date('m').'-'.date('Y'),
                     'update_date'    =>  Create_dateVN(),
                     'create_date'    =>  Create_dateVN(),
                     'create_by'      =>  Auth::user()->id,
                     'company_id'     =>  Session::get('company_id'),
                 ]);
+                $ReportAllInput->save();
 
-                $Report_All->save();
-              //  return back()->with('success', '<div class="alert alert-success">Data Inserted</div>');
-                return response()->json(1);
+              }else{
+                    $ReportAllInput = ReportAllInput::find($input['id']);
+                    $ReportAllInput->quantity = $input['value'];
+                    $ReportAllInput->update_by = Auth::user()->id;
+                    $ReportAllInput->update_date = Create_dateVN();
+                    $ReportAllInput->save();
+              }
+                ReportAll::where('id', $input['id'])
+                ->update([
+                         'update_date' =>  Create_dateVN(),
+                       ]);
 
-            }
-
-            if($request->get('button_action') == 'update')
-            {
-              //print_r($input);die;
-                $Report_All = ReportAll::find($input['id']);
-                $Report_All->code = $input['code'];
-                $Report_All->name = $input['name'];
-                $Report_All->rollback = $input['rollback'];
-                $Report_All->is_Report_All = $input['is_Report_All'];
-                $Report_All->price = str_replace(',','',$input['price']);
-                $Report_All->description = $input['description'];
-                $Report_All->update_date = Create_dateVN();
-                $Report_All->update_by =  Auth::user()->id;
-                $Report_All->save();
-              //  $success_output = '<div class="alert alert-success">Data Updated</div>';
-                return response()->json(1);
-            }
-
+              return response()->json('success');
     }
-    function EditData(Request $request)
-    {
-        $id = $request->input('id');
-        $Report_All = ReportAll::find($id);
-        $output = array(
-            'code'    =>  $Report_All->code,
-            'name'    =>  $Report_All->name,
-            'price'    =>  $Report_All->price,
-            'rollback'    =>  $Report_All->rollback,
-            'is_Report_All'    =>  $Report_All->is_Report_All,
-            'description'    =>  $Report_All->description,
-            'update_date'    =>  $Report_All->update_date,
-            'id'=>$id,
-        );
-          return response()->json([$output]);
-      //  echo json_encode($output);
-    }
-    public function DeleteData(Request $request)
-    {
-        $id = $request->input('id');
 
-        $Report_All = ReportAll::find($id);
-        if($Report_All != null) {
-            $Report_All->delete();
-            return response()->json(['success'=>'<span class="label label-success">Xóa thành công</span>']);
-        }
 
-    }
 }

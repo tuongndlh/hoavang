@@ -1,9 +1,8 @@
-@extends('master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <html lang="en">
 <head>
-      <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
-      <script src="{{ asset('public/maskmoney/jquery.maskMoney.js') }}"></script>
+      <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
+      <script src="<?php echo e(asset('public/maskmoney/jquery.maskMoney.js')); ?>"></script>
 </head>
 
 <body>
@@ -18,7 +17,7 @@
         <ol class="breadcrumb">
          <!-- <li class="breadcrumb-item">Home</li> -->
          <li class="breadcrumb-item"><a href="/hoahong"><i class="fa far fa-arrow-circle-left"></i> Trang chủ</a></li>
-         <li class="breadcrumb-item active" href="{{route('reportall')}}">Danh mục báo cáo</li>
+         <li class="breadcrumb-item active" href="<?php echo e(route('reportall')); ?>">Danh mục báo cáo</li>
        </ol>
           <div class="content-header">
              <div class="panel panel-flat">
@@ -67,7 +66,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
       <form method="POST" id="group_customer_form" enctype="multipart/form-data" >
-        {{ csrf_field()  }}
+        <?php echo e(csrf_field()); ?>
+
         <div class="modal-header  bg-primary">
           <h4 class="modal-title">Thêm mới</h4>
            <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -80,9 +80,9 @@
               <select class="select form-control"   data-width="100%"
                       name="group1" id="group1" data-placeholder="Chọn nhóm 1">
                <option></option>
-               @foreach ($group1 as $item_contact_list)
-                 <option value="{{ $item_contact_list->id }}">{{ $item_contact_list->name_content }}</option>
-               @endforeach
+               <?php $__currentLoopData = $group1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                 <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
+               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
              </select>
            </div>
        </div>
@@ -92,9 +92,9 @@
            <select class="select form-control"   data-width="100%"
                   name="group2" id="group2" data-placeholder="Chọn nhóm 2">
            <option></option>
-           @foreach ($group2 as $item_contact_list)
-             <option value="{{ $item_contact_list->id }}">{{ $item_contact_list->name_content }}</option>
-           @endforeach
+           <?php $__currentLoopData = $group2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+             <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
+           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
          </select>
          </div>
@@ -105,9 +105,9 @@
             <select class="select form-control"   data-width="100%"
                    name="group3" id="group3" data-placeholder="Chọn nhóm ">
             <option></option>
-            @foreach ($group2 as $item_contact_list)
-              <option value="{{ $item_contact_list->id }}">{{ $item_contact_list->name_content }}</option>
-            @endforeach
+            <?php $__currentLoopData = $group2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+              <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
+            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
           </div>
          </div>
 
@@ -161,7 +161,7 @@ function check_type(type) {
 
                processing: true,
                serverSide: true,
-               ajax: '{{ url('reportall_ajax') }}',
+               ajax: '<?php echo e(url('reportall_ajax')); ?>',
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'name_content' },
@@ -190,13 +190,13 @@ function check_type(type) {
                         var button_action = $("#button_action").val();
                          //console.log(i,value);
                                  $.ajax({
-                                     url:"{{ route('add_reportall') }}",
+                                     url:"<?php echo e(route('add_reportall')); ?>",
                                      method:"POST",
                                      data:{
                                        id:i,
                                        value:value,
                                        button_action:button_action,
-                                       _token: '{{csrf_token()}}'
+                                       _token: '<?php echo e(csrf_token()); ?>'
                                      },
                                      dataType:"JSON",
                                      success:function(data)
@@ -222,7 +222,7 @@ function check_type(type) {
             // $('#group_customer_form').on('submit', function(event){
             //      event.preventDefault();
             //      $.ajax({
-            //       url:"{{ route('add_reportall') }}",
+            //       url:"<?php echo e(route('add_reportall')); ?>",
             //       method:"POST",
             //       data:new FormData(this),
             //       dataType:'JSON',
@@ -251,9 +251,9 @@ function check_type(type) {
                     $('#id').val(id);
                     //  $('#form_output').html('');
                     $.ajax({
-                        url:"{{route('edit_reportall')}}",
+                        url:"<?php echo e(route('edit_reportall')); ?>",
                         method:'GET',
-                        data:{id:id, _token: '{{csrf_token()}}'},
+                        data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType:'JSON',
                         success:function(data)
                         {
@@ -302,9 +302,9 @@ function check_type(type) {
                    .then((willDelete) => {
                        if (willDelete) {
                          $.ajax({
-                           url:"{{route('delete_reportall')}}",
+                           url:"<?php echo e(route('delete_reportall')); ?>",
                            method:'GET',
-                           data:{id:id, _token: '{{csrf_token()}}'},
+                           data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
                            dataType:'JSON',
                            success:function(data)
                            {
@@ -324,4 +324,6 @@ function check_type(type) {
 
    </body>
 </html>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
