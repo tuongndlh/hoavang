@@ -22,11 +22,7 @@
           <div class="content-header">
              <div class="panel panel-flat">
                <ol class="panel-heading">
-                 <div >
-                    <div class="pull-right">
-                      <div id="add_data"><span class="btn btn-primary"><i class="fa fa-plus-circle fa-fw fa-lg"></i>Lưu dữ liệu</span> </div>
-
-                    </div>
+                 <div class="col-md-10">
                     <h2 class="panel-title">Khai báo danh mục báo cáo</h2>
                  </div>
                 </ol>
@@ -62,76 +58,6 @@
   <!-- /.row -->
 </section>
 <!-- /.content -->
-<div id="group_customer" class="modal fade" role="dialog"  data-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-      <form method="POST" id="group_customer_form" enctype="multipart/form-data" >
-        <?php echo e(csrf_field()); ?>
-
-        <div class="modal-header  bg-primary">
-          <h4 class="modal-title">Thêm mới</h4>
-           <button type="button" class="close" data-dismiss="modal">&times;</button>
-        </div>
-        <div class="modal-body modal-body-new">
-
-       <div class="form-group row">
-           <label class="control-label col-sm-3">Nhóm I<span class="text-danger"></span></label>
-           <div class="col-sm-9">
-              <select class="select form-control"   data-width="100%"
-                      name="group1" id="group1" data-placeholder="Chọn nhóm 1">
-               <option></option>
-               <?php $__currentLoopData = $group1; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                 <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
-               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-             </select>
-           </div>
-       </div>
-       <div class="form-group row">
-         <label class="control-label col-sm-3">Nhóm 2<span class="text-danger"></span></label>
-         <div class="col-sm-9">
-           <select class="select form-control"   data-width="100%"
-                  name="group2" id="group2" data-placeholder="Chọn nhóm 2">
-           <option></option>
-           <?php $__currentLoopData = $group2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-             <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
-           <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-
-         </select>
-         </div>
-        </div>
-        <div class="form-group row">
-          <label class="control-label col-sm-3">Nhóm 3<span class="text-danger"></span></label>
-          <div class="col-sm-9">
-            <select class="select form-control"   data-width="100%"
-                   name="group3" id="group3" data-placeholder="Chọn nhóm ">
-            <option></option>
-            <?php $__currentLoopData = $group2; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item_contact_list): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-              <option value="<?php echo e($item_contact_list->id); ?>"><?php echo e($item_contact_list->name_content); ?></option>
-            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-          </div>
-         </div>
-
-         <div class="form-group row">
-           <label class="control-label col-sm-3">Nội dung <span class="text-danger"></span></label>
-           <div class="col-sm-9">
-             <input type="text" class="form-control" name="name_content" id="name_content"
-             required="required" placeholder="Nhập tên nhóm"   value="">
-           </div>
-          </div>
-
-      </div>
-      <div class="modal-footer">
-           <input type="hidden" name="id" id="id" value="" />
-          <input type="hidden" name="button_action" id="button_action" value="insert" />
-          <button type="submit" onClick="check_type(1)" name="submit" id="action" class="btn btn-primary">Lưu dữ liệu</button>
-          <button type="submit" onClick="check_type(2)" name="action_new" id="action_new" class="btn btn-primary" >Lưu & Tạo mới</button>
-      </div>
-      </form>
-        </div>
-    </div>
-</div>
-
-
 
 <script type="text/javascript">
 
@@ -144,14 +70,20 @@ function check_type(type) {
 
 </script>
   <script type="text/javascript">
-  $('#price').maskMoney({thousands: ',', decimal: '.', precision: 0});
+  $('#quantity').maskMoney({thousands: ',', decimal: '.', precision: 0});
+
   $("#quantity_input").keypress(function(event){
           // console.log(event.which);
        if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
            event.preventDefault();
    }});
        $(document).ready(function() {
-
+         $('#input_date_month').datepicker({
+            format: "mm-yyyy",
+            viewMode: "months",
+            minViewMode: "months",
+            autoclose:true,
+        });
          $('.select').select2({
                     allowClear: true,
                     //minimumResultsForSearch: Infinity,
@@ -161,7 +93,9 @@ function check_type(type) {
 
                processing: true,
                serverSide: true,
-               ajax: '<?php echo e(url('reportall_ajax')); ?>',
+               ajax: {
+                        url : '<?php echo url('reportall_ajax'); ?>',
+                    },
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'name_content' },
@@ -178,6 +112,7 @@ function check_type(type) {
 
             });
 
+
             $('#table tbody').on( 'keyup', '.quantity', function () {
                    var data = table.row( $(this).parents('tr') ).data();
                    var oTable = $('#table').DataTable();
@@ -186,6 +121,14 @@ function check_type(type) {
                                .data();
                     for (var i=0; i < datatable.length ;i++){
                       if(i == data['id'] ){
+                        $('#quantity'+i).maskMoney({thousands: ',', decimal: '.', precision: 0});
+                        $('#quantity'+i).keypress(function(event){
+                                // console.log(event.which);
+                             if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+                                 event.preventDefault();
+                             }});
+
+
                         var value =$('#quantity'+i).val();
                         var button_action = $("#button_action").val();
                          //console.log(i,value);
@@ -201,12 +144,13 @@ function check_type(type) {
                                      dataType:"JSON",
                                      success:function(data)
                                      {
-                                      //  console.log(data);
+                                        console.log(data);
                                      }
                                  })
                       }
                     }
                } );
+
           })
 
 
@@ -218,31 +162,7 @@ function check_type(type) {
                 $('.modal-title').text('Thêm mới');
 
             });
-            // Them du lieu
-            // $('#group_customer_form').on('submit', function(event){
-            //      event.preventDefault();
-            //      $.ajax({
-            //       url:"<?php echo e(route('add_reportall')); ?>",
-            //       method:"POST",
-            //       data:new FormData(this),
-            //       dataType:'JSON',
-            //       contentType: false,
-            //       cache: false,
-            //       processData: false,
-            //       success:function(data)
-            //       {
-            //        $('#group_customer_form').html(data.success);
-            //        $('#group_customer_form')[0].reset();
-            //      //  $('form[name=group_customer_form]').get(0).reset();
-            //        $('.modal-title').text('Thêm mới');
-            //        $('#button_action').val('insert');
-            //        $('#table').DataTable().ajax.reload();
-            //        if(window.type == 1 ){
-            //          $('#group_customer').modal('hide');
-            //        }
-            //       }
-            //      })
-            //     });
+
 
                 // Sửa
                 $(document).on('click', '.edit', function(){

@@ -1,9 +1,8 @@
-@extends('master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <html lang="en">
 <head>
-      <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
-      <script src="{{ asset('public/maskmoney/jquery.maskMoney.js') }}"></script>
+      <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
+      <script src="<?php echo e(asset('public/maskmoney/jquery.maskMoney.js')); ?>"></script>
 </head>
 
 <body>
@@ -18,12 +17,22 @@
         <ol class="breadcrumb">
          <!-- <li class="breadcrumb-item">Home</li> -->
          <li class="breadcrumb-item"><a href="/hoahong"><i class="fa far fa-arrow-circle-left"></i> Trang chủ</a></li>
-         <li class="breadcrumb-item active" href="{{route('reportall')}}">Danh mục báo cáo</li>
+         <li class="breadcrumb-item active" href="<?php echo e(route('reportall')); ?>">Danh mục báo cáo</li>
        </ol>
           <div class="content-header">
              <div class="panel panel-flat">
                <ol class="panel-heading">
                  <div class="col-md-10">
+                    <div class="form-group row">
+                      <div class="col-md-3">
+                        <div class="col-md-4 text-right">
+                          <label> Theo tháng: </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control input_date" name="input_date_month" id="input_date_month" placeholder="Theo tháng" />
+                        </div>
+                      </div>
+                      </div>
                     <h2 class="panel-title">Khai báo danh mục báo cáo</h2>
                  </div>
                 </ol>
@@ -95,7 +104,11 @@ function check_type(type) {
                processing: true,
                serverSide: true,
                ajax: {
-                        url : '{!! url('reportall_ajax') !!}',
+                        url : '<?php echo url('view_reportall_ajax'); ?>',
+               data: function(d){
+                          var input_date_month = $('#input_date_month').val();
+                          d.input_date_month =    input_date_month;
+                      },
                     },
                columns: [
                         { data: 'id', name: 'id' },
@@ -112,7 +125,9 @@ function check_type(type) {
               },
 
             });
-
+            $('#input_date_month').change(function (e) {
+               table.draw();
+           });
 
             $('#table tbody').on( 'keyup', '.quantity', function () {
                    var data = table.row( $(this).parents('tr') ).data();
@@ -134,13 +149,13 @@ function check_type(type) {
                         var button_action = $("#button_action").val();
                          //console.log(i,value);
                                  $.ajax({
-                                     url:"{{ route('add_reportall') }}",
+                                     url:"<?php echo e(route('add_reportall')); ?>",
                                      method:"POST",
                                      data:{
                                        id:i,
                                        value:value,
                                        button_action:button_action,
-                                       _token: '{{csrf_token()}}'
+                                       _token: '<?php echo e(csrf_token()); ?>'
                                      },
                                      dataType:"JSON",
                                      success:function(data)
@@ -172,9 +187,9 @@ function check_type(type) {
                     $('#id').val(id);
                     //  $('#form_output').html('');
                     $.ajax({
-                        url:"{{route('edit_reportall')}}",
+                        url:"<?php echo e(route('edit_reportall')); ?>",
                         method:'GET',
-                        data:{id:id, _token: '{{csrf_token()}}'},
+                        data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
                         dataType:'JSON',
                         success:function(data)
                         {
@@ -223,9 +238,9 @@ function check_type(type) {
                    .then((willDelete) => {
                        if (willDelete) {
                          $.ajax({
-                           url:"{{route('delete_reportall')}}",
+                           url:"<?php echo e(route('delete_reportall')); ?>",
                            method:'GET',
-                           data:{id:id, _token: '{{csrf_token()}}'},
+                           data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
                            dataType:'JSON',
                            success:function(data)
                            {
@@ -245,4 +260,6 @@ function check_type(type) {
 
    </body>
 </html>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

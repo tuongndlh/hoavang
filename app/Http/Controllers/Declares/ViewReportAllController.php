@@ -10,7 +10,7 @@ use Auth;
 use Session;
 use DB;
 use Carbon;
-class ReportAllController extends Controller
+class ViewReportAllController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,8 +20,7 @@ class ReportAllController extends Controller
     public function index()
     {
 
-
-      return view('declare.report_all.index');
+      return view('declare.report_all.index_report');
     }
 
 
@@ -30,15 +29,15 @@ class ReportAllController extends Controller
     {
          //$Report_All = ReportAll::select();
      $input = $request->all();
-     $company_id =Session::get('company_id');
-     $month =   "'".date('m').'-'.date('Y')."'";
      $user_id = Auth::user()->id;
-     $query =  "SELECT  t1.id, t1.name_content,t1.parent_id, t1.update_date,
-                  (SELECT quantity from hv_report_input where month = $month and user_id =$user_id and report_all_id =t1.id) quantity
-                  from hv_report_all t1
-                  where t1.company_id = $company_id ORDER BY t1.id ";
+     $input['input_date_month'] != null ? $input_date_month = 'and t2.month ='."'".$input['input_date_month']."'" : $input_date_month = '';
+     $company_id =Session::get('company_id');
+
+     $query =  "select t1.id, t1.name_content,t1.parent_id, t2.quantity, t1.update_date from hv_report_all t1
+                    left join hv_report_input t2 on t2.report_all_id = t1.id
+                    where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month ORDER BY t1.id";
     $Report_All = DB::select($query);
-     //print_r($query );die;
+    print_r($query );die;
      return Datatables::of($Report_All)
 
      ->addColumn('name_content', function($Report_All){
@@ -47,9 +46,7 @@ class ReportAllController extends Controller
       return $name_content;
    })
    ->addColumn('quantity', function($Report_All){
-     $Report_All->parent_id != null ? $quantity = '<input tabindex="'.$Report_All->id.'"
-     type="text" class="quantity" id="'."quantity".$Report_All->id.'" name="quantity"
-     value="'.number_format_drop_zero_decimals($Report_All->quantity,3).'" />' : $quantity = null;
+     $Report_All->parent_id != null ? $quantity = number_format_drop_zero_decimals($Report_All->quantity,3) : $quantity = null;
     return $quantity;
   })
   ->addColumn('update_date', function($Report_All){
@@ -89,13 +86,17 @@ class ReportAllController extends Controller
 
               }else{
               // print_r($query);die;
+                $month =   "'".date('m').'-'.date('Y')."'";
 
-                    ReportAllInput::where('report_all_id', $input['id'])
-                    ->update([
-                             'quantity' => str_replace(",","",$input['value']),
-                             'update_by' => Auth::user()->id,
-                             'update_date' => Create_dateVN()
-                           ]);
+                ReportAllInput::where('report_all_id', $input['id'])
+                  ->where('user_id', Auth::user()->id)
+                  ->where('month', $month)
+                  ->update([
+                           'quantity' => str_replace(",","",$input['value']),
+                           'update_by' => Auth::user()->id,
+                           'update_date' => Create_dateVN()
+                         ]);
+
               }
 
                 ReportAll::where('id', $input['id'])

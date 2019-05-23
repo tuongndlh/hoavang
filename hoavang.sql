@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2019 at 02:19 AM
--- Server version: 10.1.39-MariaDB
--- PHP Version: 7.1.29
+-- Generation Time: May 23, 2019 at 12:06 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -628,54 +628,54 @@ CREATE TABLE `hv_report_all` (
 --
 
 INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `create_date`, `update_by`, `update_date`, `company_id`) VALUES
-(1, 'TÌNH HÌNH HOẠT ĐỘNG Y TẾ', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(2, 'CÔNG TÁC KHÁM CHỮA BỆNH', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(3, ' Tổng số lần khám chữa bệnh (Bao gồm: (1.1) + (1.2))', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(4, ' Tổng số ca tai nạn thương tích ((1.1.a) + (1.2.b))', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(5, 'Trong đó:', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(6, ' Khám BHYT:    ', 3, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(7, ' - Trẻ em <15 tuổi:', 6, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(8, ' - Khám YHCT:', 6, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(9, ' - Số ca tai nạn thương tích', 6, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(10, ' Khám dịch vụ:', 3, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(11, ' - Trẻ em <15 tuổi:', 10, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(12, ' - Khám YHCT:', 10, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(13, ' - Số ca tai nạn thương tích', 10, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(1, 'TÌNH HÌNH HOẠT ĐỘNG Y TẾ', NULL, 1, NULL, NULL, '2019-05-22 16:56:06', 2),
+(2, 'CÔNG TÁC KHÁM CHỮA BỆNH', NULL, 1, NULL, NULL, '2019-05-22 17:05:17', 2),
+(3, ' Tổng số lần khám chữa bệnh (Bao gồm: (1.1) + (1.2))', 2, 1, NULL, NULL, '2019-05-23 14:33:02', 2),
+(4, ' Tổng số ca tai nạn thương tích ((1.1.a) + (1.2.b))', 2, 1, NULL, NULL, '2019-05-23 09:51:44', 2),
+(5, 'Trong đó:', NULL, 1, NULL, NULL, '2019-05-22 16:32:43', 2),
+(6, ' Khám BHYT:    ', 3, 1, NULL, NULL, '2019-05-22 17:11:49', 2),
+(7, ' - Trẻ em <15 tuổi:', 6, 1, NULL, NULL, '2019-05-22 17:11:54', 2),
+(8, ' - Khám YHCT:', 6, 1, NULL, NULL, '2019-05-23 14:18:18', 2),
+(9, ' - Số ca tai nạn thương tích', 6, 1, NULL, NULL, '2019-05-22 17:12:13', 2),
+(10, ' Khám dịch vụ:', 3, 1, NULL, NULL, '2019-05-23 14:10:03', 2),
+(11, ' - Trẻ em <15 tuổi:', 10, 1, NULL, NULL, '2019-05-22 17:14:59', 2),
+(12, ' - Khám YHCT:', 10, 1, NULL, NULL, '2019-05-22 17:16:00', 2),
+(13, ' - Số ca tai nạn thương tích', 10, 1, NULL, NULL, '2019-05-23 13:48:27', 2),
 (14, 'Tổng số bệnh nhân chuyển tuyến:', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(15, 'Tổng số lượt điều trị ngoại trú (Bao gồm: (1) - (2))', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(16, 'Tổng số BN tai nạn thương tích', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(15, 'Tổng số lượt điều trị ngoại trú (Bao gồm: (1) - (2))', 2, 1, NULL, NULL, '2019-05-21 17:53:44', 2),
+(16, 'Tổng số BN tai nạn thương tích', 2, 1, NULL, NULL, '2019-05-22 17:17:56', 2),
 (17, 'Tai nạn giao thông', 16, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(18, 'Ngộ độc thực phẩm', 16, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(18, 'Ngộ độc thực phẩm', 16, 1, NULL, NULL, '2019-05-22 17:17:42', 2),
 (19, 'Tự tử', 16, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (20, 'Tai nạn lao động', 16, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (21, 'Tai nạn khác', 16, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (22, 'Số lượt điều trị nội trú:', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (23, 'Trong đó: BHYT', 22, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(24, 'Số ngày điều trị nội trú:', 22, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(24, 'Số ngày điều trị nội trú:', 22, 1, NULL, NULL, '2019-05-23 14:18:29', 2),
 (25, 'Tổng số lần khám bệnh khác', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (26, 'Khám sức khỏe người cao tuổi', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(27, 'Khám sức khỏe người neo đơn', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(28, 'Khám tâm thần', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(29, 'Khám Tiêm chủng mở rộng', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(27, 'Khám sức khỏe người neo đơn', 26, 1, NULL, NULL, '2019-05-22 16:53:33', 2),
+(28, 'Khám tâm thần', 26, 1, NULL, NULL, '2019-05-22 16:55:07', 2),
+(29, 'Khám Tiêm chủng mở rộng', 26, 1, NULL, NULL, '2019-05-22 16:55:38', 2),
 (30, 'Khám phụ khoa', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (31, 'Khám thai', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(32, 'Khám sức khỏe học sinh', 26, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(32, 'Khám sức khỏe học sinh', 26, 1, NULL, NULL, '2019-05-22 15:04:46', 2),
 (33, 'Tổng số lần thực hiện thủ thuật:', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(34, 'Thủ ngoại khoa ( Khâu VT, xẻ nhọt,…)', 33, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(34, 'Thủ ngoại khoa ( Khâu VT, xẻ nhọt,…)', 33, 1, NULL, NULL, '2019-05-21 17:54:03', 2),
 (35, 'Tổng số thủ thuật Đông Y ( điện châm , chiếu đèn, xoa bóp bấm huyệt)', 33, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (36, 'Dịch vụ cận lâm sàng:', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (37, 'Siêu âm', 36, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (38, 'Điện tim', 36, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (39, 'Xét nghiệm (ghi cụ thể tên xét nghiệm vào các ô dưới)', 36, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (40, 'Hoạt động khám chữa bệnh từ thiện', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(41, 'Tên đoàn khám', 40, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(41, 'Tên đoàn khám', 40, 1, NULL, NULL, '2019-05-22 15:06:10', 2),
 (42, 'Đơn vị thực hiện', 40, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (43, 'Số lượng mời', 40, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (44, 'Số lượng đến tham gia', 40, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (45, 'Tổng sô bệnh nhân đến khám mắc các bệnh', 2, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (46, 'Viêm phổi', 45, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (47, 'Nhiểm khuẩn đường hô hấp trên', 45, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(48, 'CHƯƠNG TRÌNH PHÒNG CHỐNG BỆNH LAO', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(48, 'CHƯƠNG TRÌNH PHÒNG CHỐNG BỆNH LAO', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (49, 'Số BN ho, khạc đàm (nghi ngờ Lao) chuyển tuyến trên khám, XN đàm', 48, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (50, 'Số BN Lao thu nhận, điều trị', 48, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (51, ' - BN Lao phổi có bằng chứng vi khuẩn học', 50, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
@@ -693,7 +693,7 @@ INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `cr
 (63, 'Tổng số BN hen điều trị', 48, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (64, 'Tổng số BN bị bệnh phổi tắc nghẽn mạn tính (COPD) đang quản lý', 48, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (65, 'Tổng số BN bị bệnh phổi tắc nghẽn mạn tính (COPD) điều trị', 48, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(66, 'CÔNG TÁC PHÒNG CHỐNG DỊCH', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(66, 'CÔNG TÁC PHÒNG CHỐNG DỊCH', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (67, 'Công tác phòng chống Sốt xuất huyết', 66, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (68, 'Số mắc mới', 67, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (69, ' - Cộng dồn', 67, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
@@ -708,10 +708,10 @@ INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `cr
 (78, ' - Cộng dồn', 74, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (79, 'Ổ dịch mới', 74, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (80, ' - Cộng dồn', 74, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(81, 'Các loại dịch bệnh khác', 66, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(82, 'Các hoạt động phòng chống dịch đã triển khai trong tháng', 66, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(81, 'Các loại dịch bệnh khác', 66, 1, NULL, NULL, '2019-05-22 17:03:00', 2),
+(82, 'Các hoạt động phòng chống dịch đã triển khai trong tháng', 66, 1, NULL, NULL, '2019-05-21 17:54:22', 2),
 (83, 'Tuyên truyền tại cộng đồng phòng chống sốt xuất huyết, phát tờ rơi ', 82, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(84, 'CHƯƠNG TRÌNH TIÊM CHỦNG MỞ RỘNG', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(84, 'CHƯƠNG TRÌNH TIÊM CHỦNG MỞ RỘNG', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (85, 'Trẻ dưới 1 tuổi được tiêm chủng đầy đủ', 84, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (86, ' - Tỷ lệ (%)', 85, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (87, 'Trẻ đủ 12 tháng tuổi tiêm Viêm não nhật bản', 84, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
@@ -722,24 +722,24 @@ INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `cr
 (92, ' - Tỷ lệ (%)', 88, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (93, 'PNCT được tiêm UV2+ ', 84, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (94, ' - Tỷ lệ (%)', 93, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(95, 'CHƯƠNG TRÌNH SỐT RÉT', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(95, 'CHƯƠNG TRÌNH SỐT RÉT', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (96, 'Số mắc mới', 95, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(97, ' - Cộng dồn', 96, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(97, ' - Cộng dồn', 96, 1, NULL, NULL, '2019-05-22 17:19:05', 2),
 (98, 'Số lam xã tháng', 95, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (99, ' - Cộng dồn', 98, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(100, 'CHƯƠNG TRÌNH PHONG', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(100, 'CHƯƠNG TRÌNH PHONG', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (101, 'Tổng số BN khám lồng ghép tại trạm', 100, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (102, 'Tổng số BN khám tiếp xúc tại cụm dân cư', 100, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (103, 'Tuyên truyền tại cộng đồng', 100, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (104, ' - Số lượt tuyên truyền', 103, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (105, ' - Số lượng người tham gia', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(106, 'CHƯƠNG TRÌNH HIV/AIDS', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(106, 'CHƯƠNG TRÌNH HIV/AIDS', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (107, 'Số mắc mới (Trong tháng):', 106, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (108, 'Số người nhiễm HIV/AIDS còn sống được lập hồ sơ quản lý, chăm sóc, điều trị tại cộng đồng: ', 106, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (109, 'Số bệnh nhân HIV tích lũy: ', 106, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (110, 'Chương trình điều trị Methadone: ', 106, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (111, 'Số ca nhiễm HIV/AIDS được điều trị thuốc ARV: ', 106, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(112, 'CHƯƠNG TRÌNH QUẢN LÝ BỆNH KHÔNG LÂY NHIỄM', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(112, 'CHƯƠNG TRÌNH QUẢN LÝ BỆNH KHÔNG LÂY NHIỄM', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (113, 'Số bệnh nhân hiện mắc bệnh không lây nhiễm hiện đang quản lý', 112, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (114, 'Tăng huyết áp', 113, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (115, 'Đái tháo đường', 113, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
@@ -785,20 +785,20 @@ INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `cr
 (155, 'Đái tháo đường', 153, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (156, 'Hen phế quản', 153, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (157, 'COPD', 153, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(158, 'CHƯƠNG TRÌNH Y TẾ HỌC ĐƯỜNG (Nêu các hoạt động đã thực hiện)', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(159, 'CHƯƠNG TRÌNH QUẢN LÝ SỨC KHỎE HỘ GIA ĐÌNH', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(158, 'CHƯƠNG TRÌNH Y TẾ HỌC ĐƯỜNG (Nêu các hoạt động đã thực hiện)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(159, 'CHƯƠNG TRÌNH QUẢN LÝ SỨC KHỎE HỘ GIA ĐÌNH', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (160, 'Tổng số hồ sơ khám lập ', 159, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (161, 'Tổng số hồ sơ khởi tạo', 159, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(162, 'CHƯƠNG TRÌNH VỆ SINH MÔI TRƯỜNG (Liệt kê cụ thể các hoạt động đã thực hiện)', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(162, 'CHƯƠNG TRÌNH VỆ SINH MÔI TRƯỜNG (Liệt kê cụ thể các hoạt động đã thực hiện)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (163, 'Số nơi công cộng được điều tra vệ sinh môi trường', 162, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (164, 'Số hộ gia đình được điều tra vệ sinh môi trường', 162, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (165, 'Số nguồn nước được lấy mẫu đi xét ngiệm:', 162, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(166, 'Số đợt truyền thông giáo dục sức khỏe tại cộng đồng (ghi rõ thời gian, địa điểm, nội dung, đối tượng, số người tham gia, thành phần tham dự)', 162, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(167, 'CHƯƠNG TRÌNH DINH DƯỠNG CỘNG ĐỒNG (Liệt kê cụ thể các hoạt động đã thực hiện)', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(168, 'Số đợt truyền thông giáo dục sức khỏe về dinh dưỡng tại cộng đồng (ghi rõ thời gian, địa điểm, nội dung, đối tượng, số người tham gia, thành phần tham dự)', 167, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(169, 'CHƯƠNG TRÌNH VỆ SINH LAO ĐỘNG', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(166, 'Số đợt truyền thông giáo dục sức khỏe tại cộng đồng</br> (ghi rõ thời gian, địa điểm, nội dung, đối tượng, số người tham gia, thành phần tham dự)', 162, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(167, 'CHƯƠNG TRÌNH DINH DƯỠNG CỘNG ĐỒNG</br> (Liệt kê cụ thể các hoạt động đã thực hiện)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(168, 'Số đợt truyền thông giáo dục sức khỏe về dinh dưỡng tại cộng đồng </br>(ghi rõ thời gian, địa điểm, nội dung, đối tượng, số người tham gia, thành phần tham dự)', 167, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(169, 'CHƯƠNG TRÌNH VỆ SINH LAO ĐỘNG', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (170, 'Số cơ sở doanh nghiệp trên địa bàn xã', 169, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(171, 'CHƯƠNG TRÌNH TÂM THẦN', 1, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(171, 'CHƯƠNG TRÌNH TÂM THẦN', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (172, 'Bệnh nhân đang quản lý tháng trước', 171, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (173, 'Tâm thần phân liệt', 172, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (174, 'Động kinh', 172, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
@@ -847,23 +847,23 @@ INSERT INTO `hv_report_all` (`id`, `name_content`, `parent_id`, `create_by`, `cr
 (217, 'Bệnh nhân chuyển đi trong/ ngoài thành phố', 171, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (218, 'Tâm thần phân liệt', 217, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (219, 'Động kinh', 218, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(220, 'Trầm cảm', 218, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(221, 'Rối loạn khác', 218, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(222, 'Tổng số bệnh nhân đang điều trị', 171, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(220, 'Trầm cảm', 218, 1, NULL, NULL, '2019-05-22 16:19:37', 2),
+(221, 'Rối loạn khác', 218, 1, NULL, NULL, '2019-05-22 16:19:27', 2),
+(222, 'Tổng số bệnh nhân đang điều trị', 171, 1, NULL, NULL, '2019-05-22 16:19:29', 2),
 (223, 'Tâm thần phân liệt', 222, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (224, 'Động kinh', 222, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (225, 'Trầm cảm', 222, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (226, 'Rối loạn khác', 222, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
 (227, 'KẾT QUẢ THỰC HIỆN NHIỆM VỤ THÁNG (Nêu ngắn gọn, đi vào trọng tâm công việc)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(228, 'Duy trì thường xuyên thực hiện các thủ thuật tại trạm, vòng 30 ca, cấy 11 ca , triệt sản 0 ca, thuốc tiêm : 0, thuốc uống: 125 ca, bao cao su: 440', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(229, 'Triển khai mục tiêu thứ 3 trọng tâm của ngành Y tế : Quản lý bệnh không lây nhiễm theo nguyên lý hộ gia đình', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(230, 'Chiến dịch Sởi rubella 1-5 tuổi 1318/1485 đạt 95,2%, Chiến dịch tiêm combe Five được 30 trẻ, không có phản ứng nặng xảy ra', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(231, 'KẾ HOẠCH THÁNG ĐẾN (Nêu những việc chính cần làm trong tháng đến, không nêu những công việc thường xuyên)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(232, 'Xây dựng phòng khám mới đi vào sử dụng', 231, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(233, 'Sắp xếp nơi làm việc cho Dân số viên, chuẩn bị sát nhập đội ngủ CTV Dân số Y tế', 231, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(234, 'Hoàn thiện Hồ sơ bệnh án Không lây nhiễm sang mẫu mới', 231, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(235, 'Nâng cao tiến độ cập nhật Hồ sơ Sức khỏe cá nhân theo Nguyên lý Hộ gia đình', 231, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
-(236, 'ĐỀ XUẤT VÀ KIẾN NGHỊ', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2);
+(228, 'Duy trì thường xuyên thực hiện các thủ thuật tại trạm, </br>vòng 30 ca, cấy 11 ca , triệt sản 0 ca, thuốc tiêm : 0, thuốc uống: 125 ca, bao cao su: 440', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(229, 'Triển khai mục tiêu thứ 3 trọng tâm của ngành Y tế :</br> Quản lý bệnh không lây nhiễm theo nguyên lý hộ gia đình', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(230, 'Chiến dịch Sởi rubella 1-5 tuổi 1318/1485 đạt 95,2%, </br>Chiến dịch tiêm combe Five được 30 trẻ, không có phản ứng nặng xảy ra', 227, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(231, 'KẾ HOẠCH THÁNG ĐẾN </br>(Nêu những việc chính cần làm trong tháng đến, không nêu những công việc thường xuyên)', NULL, 1, NULL, NULL, '2019-05-17 21:12:00', 2),
+(232, 'Xây dựng phòng khám mới đi vào sử dụng', 231, 1, NULL, NULL, '2019-05-22 15:15:16', 2),
+(233, 'Sắp xếp nơi làm việc cho Dân số viên, chuẩn bị sát nhập đội ngủ CTV Dân số Y tế', 231, 1, NULL, NULL, '2019-05-22 16:19:43', 2),
+(234, 'Hoàn thiện Hồ sơ bệnh án Không lây nhiễm sang mẫu mới', 231, 1, NULL, NULL, '2019-05-22 15:07:54', 2),
+(235, 'Nâng cao tiến độ cập nhật Hồ sơ Sức khỏe cá nhân theo Nguyên lý Hộ gia đình', 231, 1, NULL, NULL, '2019-05-22 15:12:56', 2),
+(236, 'ĐỀ XUẤT VÀ KIẾN NGHỊ', NULL, 1, NULL, NULL, '2019-05-22 15:14:24', 2);
 
 -- --------------------------------------------------------
 
@@ -877,13 +877,52 @@ CREATE TABLE `hv_report_input` (
   `user_id` int(11) NOT NULL,
   `report_all_id` int(11) NOT NULL,
   `quantity` int(11) DEFAULT NULL,
-  `month` datetime DEFAULT NULL,
+  `month` varchar(255) DEFAULT NULL,
   `create_by` int(11) DEFAULT NULL,
   `create_date` datetime DEFAULT NULL,
   `update_by` int(11) DEFAULT NULL,
   `update_date` datetime DEFAULT NULL,
   `company_id` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `hv_report_input`
+--
+
+INSERT INTO `hv_report_input` (`id`, `user_id`, `report_all_id`, `quantity`, `month`, `create_by`, `create_date`, `update_by`, `update_date`, `company_id`) VALUES
+(1, 1, 236, 3356557, '05-2019', 1, '2019-05-22 16:09:18', NULL, '2019-05-22 16:09:18', 2),
+(2, 1, 209, 1444645555, '05-2019', 1, '2019-05-22 16:10:01', NULL, '2019-05-22 16:10:01', 2),
+(3, 1, 221, 44444, '05-2019', 1, '2019-05-22 16:19:21', 1, '2019-05-22 16:19:27', 2),
+(4, 1, 222, 444444, '05-2019', 1, '2019-05-22 16:19:28', 1, '2019-05-22 16:19:29', 2),
+(5, 1, 220, 3, '05-2019', 1, '2019-05-22 16:19:33', 1, '2019-05-22 16:19:37', 2),
+(6, 1, 233, 66666, '05-2019', 1, '2019-05-22 16:19:39', 1, '2019-05-22 16:19:43', 2),
+(7, 1, 1, 333, '05-2019', 1, '2019-05-22 16:19:54', 1, '2019-05-22 16:56:06', 2),
+(8, 1, 4, 343, '05-2019', 1, '2019-05-22 16:19:55', 2, '2019-05-23 09:51:44', 2),
+(9, 1, 3, 1534, '05-2019', 1, '2019-05-22 16:19:56', 2, '2019-05-23 14:33:02', 2),
+(10, 1, 2, 6664, '05-2019', 1, '2019-05-22 16:32:39', 1, '2019-05-22 17:05:17', 2),
+(11, 1, 5, 666, '05-2019', 1, '2019-05-22 16:32:43', 1, '2019-05-22 16:32:43', 2),
+(12, 1, 6, 977, '05-2019', 1, '2019-05-22 16:34:32', 1, '2019-05-22 17:11:49', 2),
+(13, 1, 27, 444444444, '05-2019', 1, '2019-05-22 16:53:15', 1, '2019-05-22 16:53:33', 2),
+(14, 1, 28, 4555555, '05-2019', 1, '2019-05-22 16:53:35', 1, '2019-05-22 16:55:07', 2),
+(15, 1, 29, 446, '05-2019', 1, '2019-05-22 16:55:09', 1, '2019-05-22 16:55:38', 2),
+(16, 1, 7, 73, '05-2019', 1, '2019-05-22 16:55:45', 1, '2019-05-22 17:11:54', 2),
+(17, 1, 8, 444, '05-2019', 1, '2019-05-22 16:55:54', 2, '2019-05-23 14:18:18', 2),
+(18, 1, 81, 0, '05-2019', 1, '2019-05-22 17:02:59', 1, '2019-05-22 17:03:00', 2),
+(19, 1, 9, 10, '05-2019', 1, '2019-05-22 17:12:09', 1, '2019-05-22 17:12:13', 2),
+(20, 1, 10, 3555, '05-2019', 1, '2019-05-22 17:12:23', 2, '2019-05-23 14:10:03', 2),
+(21, 1, 11, 23, '05-2019', 1, '2019-05-22 17:14:55', 1, '2019-05-22 17:14:59', 2),
+(22, 1, 13, 4656, '05-2019', 1, '2019-05-22 17:15:00', 2, '2019-05-23 13:48:27', 2),
+(23, 1, 12, 0, '05-2019', 1, '2019-05-22 17:15:41', 1, '2019-05-22 17:16:00', 2),
+(24, 1, 18, 4444, '05-2019', 1, '2019-05-22 17:17:16', 1, '2019-05-22 17:17:42', 2),
+(25, 1, 16, 44433, '05-2019', 1, '2019-05-22 17:17:53', 1, '2019-05-22 17:17:56', 2),
+(26, 1, 97, 4444, '05-2019', 1, '2019-05-22 17:19:04', 1, '2019-05-22 17:19:05', 2),
+(27, 2, 3, 1534, '04-2019', 2, '2019-05-23 09:47:18', 2, '2019-05-23 14:33:02', 2),
+(28, 2, 4, 343, '05-2019', 2, '2019-05-23 09:51:44', 2, '2019-05-23 09:51:44', 2),
+(29, 2, 13, 4656, '05-2019', 2, '2019-05-23 13:46:10', 2, '2019-05-23 13:48:27', 2),
+(30, 2, 10, 3555, '05-2019', 2, '2019-05-23 14:07:29', 2, '2019-05-23 14:10:03', 2),
+(31, 2, 8, 444, '05-2019', 2, '2019-05-23 14:18:17', 2, '2019-05-23 14:18:18', 2),
+(32, 2, 24, 33343, '05-2019', 2, '2019-05-23 14:18:27', 2, '2019-05-23 14:18:29', 2),
+(33, 2, 3, 1534, '05-2019', 2, '2019-05-23 14:22:26', 2, '2019-05-23 14:33:02', 2);
 
 -- --------------------------------------------------------
 
@@ -932,7 +971,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `company_id`, `department_id`, `code`, `fullname`, `username`, `email`, `password`, `remember_token`, `position`, `mobile`, `manager_assign`, `permission`, `persional_id`, `home`, `task`, `language`, `changepass`, `resetpass`, `locked`, `orderby`, `lastvisited`, `menu`, `create_by`, `update_by`, `created_date`, `updated_date`, `status`, `birthday`, `sex`, `description`, `ismanager`) VALUES
-(1, 2, 11, 'LHTM0001', 'Trung tâm y tế hòa vang', 'hoahong', 'hoavang@gmail.com', '$2y$10$kLP.PghDE8Yd6zYvE7/dz.xls8uvlnpmnySrRTyAG.Fi/xScuz.0e', 'qUUIWxNDgHwSC6pmTNLXoM2vTcmdsneaPC8VLBm76YlByHj9WPLYckZwsjje', 'aaaa', NULL, 2, 0, NULL, 0, 0, 0, '0000-00-00 00:00:00', 0, 1, 0, '2019-02-19 03:03:19', '', NULL, 1, '0000-00-00 00:00:00', '2019-02-19 03:03:19', 1, NULL, 1, NULL, 1);
+(1, 2, 11, 'LHTM0001', 'Trung tâm y tế hòa vang', 'hoahong', 'hoavang@trungtamytehoavang.com.vn', '$2y$10$kLP.PghDE8Yd6zYvE7/dz.xls8uvlnpmnySrRTyAG.Fi/xScuz.0e', 'CP9aF6DbGWKYWXREP8BaKHl9LotytOhOsZf4wC66Ydn5P0bwWSHoMVAGwmEe', 'aaaa', NULL, 2, 0, NULL, 0, 0, 0, '0000-00-00 00:00:00', 0, 1, 0, '2019-02-19 03:03:19', '', NULL, 1, '0000-00-00 00:00:00', '2019-02-19 03:03:19', 1, NULL, 1, NULL, 1),
+(2, 2, 11, 'LHTM0001', 'Hòa Bắc', 'hoabac', 'hoabac@trungtamytehoavang.com.vn', '$2y$10$kLP.PghDE8Yd6zYvE7/dz.xls8uvlnpmnySrRTyAG.Fi/xScuz.0e', 'qUUIWxNDgHwSC6pmTNLXoM2vTcmdsneaPC8VLBm76YlByHj9WPLYckZwsjje', 'aaaa', NULL, 2, 0, NULL, 0, 0, 0, '0000-00-00 00:00:00', 0, 1, 0, '2019-02-19 03:03:19', '', NULL, 1, '0000-00-00 00:00:00', '2019-02-19 03:03:19', 1, NULL, 1, NULL, 1),
+(3, 2, 11, 'LHTM0001', 'Hòa Ninh', 'hoaninh', 'hoaninh@trungtamytehoavang.com.vn', '$2y$10$kLP.PghDE8Yd6zYvE7/dz.xls8uvlnpmnySrRTyAG.Fi/xScuz.0e', 'qUUIWxNDgHwSC6pmTNLXoM2vTcmdsneaPC8VLBm76YlByHj9WPLYckZwsjje', 'aaaa', NULL, 2, 0, NULL, 0, 0, 0, '0000-00-00 00:00:00', 0, 1, 0, '2019-02-19 03:03:19', '', NULL, 1, '0000-00-00 00:00:00', '2019-02-19 03:03:19', 1, NULL, 1, NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -1050,19 +1091,19 @@ ALTER TABLE `hh_type_cost`
 -- AUTO_INCREMENT for table `hv_report_all`
 --
 ALTER TABLE `hv_report_all`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=242;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=266;
 
 --
 -- AUTO_INCREMENT for table `hv_report_input`
 --
 ALTER TABLE `hv_report_input`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

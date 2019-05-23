@@ -24,6 +24,16 @@
              <div class="panel panel-flat">
                <ol class="panel-heading">
                  <div class="col-md-10">
+                    <div class="form-group row">
+                      <div class="col-md-3">
+                        <div class="col-md-4 text-right">
+                          <label> Theo tháng: </label>
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control input_date" name="input_date_month" id="input_date_month" placeholder="Theo tháng" />
+                        </div>
+                      </div>
+                      </div>
                     <h2 class="panel-title">Khai báo danh mục báo cáo</h2>
                  </div>
                 </ol>
@@ -95,7 +105,11 @@ function check_type(type) {
                processing: true,
                serverSide: true,
                ajax: {
-                        url : '{!! url('reportall_ajax') !!}',
+                        url : '{!! url('view_reportall_ajax') !!}',
+               data: function(d){
+                          var input_date_month = $('#input_date_month').val();
+                          d.input_date_month =    input_date_month;
+                      },
                     },
                columns: [
                         { data: 'id', name: 'id' },
@@ -112,7 +126,9 @@ function check_type(type) {
               },
 
             });
-
+            $('#input_date_month').change(function (e) {
+               table.draw();
+           });
 
             $('#table tbody').on( 'keyup', '.quantity', function () {
                    var data = table.row( $(this).parents('tr') ).data();
