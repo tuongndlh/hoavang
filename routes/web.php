@@ -26,18 +26,28 @@ Auth::routes();
 
 	Route::get('/', 'Account\UserController@blank')->name('/');
 
-	//Lớp
-	Route::get('/class', 'Declares\ViewReportAllController@index')->name('class');
+
+
+	//Input
+	Route::get('/reportall', 'Declares\ReportAllController@index')->name('reportall');
+	Route::get('reportinput_ajax', 'Declares\ReportAllController@Get_Report_Input');
+	Route::post('add_reportall', 'Declares\ReportAllController@AddData')->name('add_reportall');
+	// Route::get('edit_reportall', 'Declares\ReportAllController@EditData')->name('edit_reportall');
+	// Route::get('get_code_reportall', 'Declares\ReportAllController@Get_Code_reportall');
+	// Route::get('delete_reportall', 'Declares\ReportAllController@DeleteData')->name('delete_reportall');
+
+
+  //View
+	Route::get('/report', 'Declares\ViewReportAllController@index')->name('report');
 	Route::get('view_reportall_ajax', 'Declares\ViewReportAllController@Get_Report_All');
 	Route::get('get_code', 'Declares\ViewReportAllController@Get_Code');
 
-	//ReportAll
-	Route::get('/reportall', 'Declares\ReportAllController@index')->name('reportall');
-	Route::get('reportall_ajax', 'Declares\ReportAllController@Get_Report_All');
-	Route::post('add_reportall', 'Declares\ReportAllController@AddData')->name('add_reportall');
-	Route::get('edit_reportall', 'Declares\ReportAllController@EditData')->name('edit_reportall');
-	Route::get('get_code_reportall', 'Declares\ReportAllController@Get_Code_reportall');
-	Route::get('delete_reportall', 'Declares\ReportAllController@DeleteData')->name('delete_reportall');
+  // Admin View
+  Route::get('/admin_report', 'Declares\AdminViewReportAllController@index')->name('admin_report');
+  Route::get('view_adminreportall_ajax', 'Declares\AdminViewReportAllController@Get_Admin_Report_All');
+  Route::get('get_code', 'Declares\AdminViewReportAllController@Get_Code');
+  Route::get('downloadExcel/{type}', 'Declares\AdminViewReportAllController@downloadExcel');
+
 
 
 

@@ -1,9 +1,8 @@
-@extends('master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <html lang="en">
 <head>
-      <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
-      <script src="{{ asset('public/maskmoney/jquery.maskMoney.js') }}"></script>
+      <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
+      <script src="<?php echo e(asset('public/maskmoney/jquery.maskMoney.js')); ?>"></script>
 </head>
 
 <body>
@@ -18,7 +17,7 @@
         <ol class="breadcrumb">
          <!-- <li class="breadcrumb-item">Home</li> -->
          <li class="breadcrumb-item"><a href="/hoahong"><i class="fa far fa-arrow-circle-left"></i> Trang chủ</a></li>
-         <li class="breadcrumb-item active" href="{{route('reportall')}}">Danh mục báo cáo</li>
+         <li class="breadcrumb-item active" href="<?php echo e(route('reportall')); ?>">Danh mục báo cáo</li>
        </ol>
           <div class="content-header">
              <div class="panel panel-flat">
@@ -32,12 +31,23 @@
                       <div class="container-fluid">
                          <div class="animate fadeIn">
                             <div class="panel-body">
+                             <a href="<?php echo e(url('downloadExcel/xlsx')); ?>"><button class="btn btn-success">Download Excel</button></a>
                              <table width="100%" class="display nowrap" style="width:100%" cellspacing="0" id="table">
                                <thead>
                                  <tr>
-                                   <th>STT</th>
-                                   <th>Nội dung</th>
-                                   <th>Số lượng</th>
+                                    <th>STT</th>
+                                    <th>Nội dung</th>
+                                    <th>Hòa Bắc</th>
+                                    <th>Hòa Ninh</th>
+                                    <th>Hòa Liên</th>
+                                    <th>Hòa Sơn</th>
+                                    <th>Hòa Châu</th>
+                                    <th>Hòa Tiến</th>
+                                    <th>Hòa Phước</th>
+                                    <th>Hòa Phong</th>
+                                    <th>Hòa Khương</th>
+                                    <th>Hòa Nhơn</th>
+                                    <th>Hòa Phú</th>
                                    <th>Cập nhật</th>
                                    <!-- <th>Tác vụ</th> -->
                                  </tr>
@@ -71,14 +81,25 @@ function check_type(type) {
 
 </script>
   <script type="text/javascript">
-  $('#quantity').maskMoney({thousands: ',', decimal: '.', precision: 0});
+      $('#quantity').maskMoney({thousands: ',', decimal: '.', precision: 0});
 
-  $("#quantity_input").keypress(function(event){
-          // console.log(event.which);
-       if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
-           event.preventDefault();
-   }});
+      $("#quantity_input").keypress(function(event){
+              // console.log(event.which);
+           if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+               event.preventDefault();
+       }});
+
+
        $(document).ready(function() {
+         var today = new Date();
+         var month1 = today.getMonth()+1;
+         var month = ("0" + month1).slice(-2);
+         var year  = today.getFullYear();
+         var value = month + '-'+ year;
+      //   console.log(month+'-'+ year);
+
+        $("#input_date_month").val(value);
+
          $('#input_date_month').datepicker({
             format: "mm-yyyy",
             viewMode: "months",
@@ -91,16 +112,34 @@ function check_type(type) {
                   });
          $(function() {
           var table =     $('#table').DataTable({
-
+               scrollY:        "600px",
+               scrollX:        true,
+               scrollCollapse: true,
+               paging:         false,
+               columnDefs: [
+                   { width: 100, targets: 1 }
+               ],
+               fixedColumns: true,
                processing: true,
                serverSide: true,
                ajax: {
-                        url : '{!! url('reportinput_ajax') !!}',
-                    },
+                       url : '<?php echo url('view_adminreportall_ajax'); ?>',
+                   },
                columns: [
                         { data: 'id', name: 'id' },
                         { data: 'name_content' },
-                        { data: 'quantity'},
+                        { data: 'HoaBac',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'HoaNinh',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoalien',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoason',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoachau',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoatien',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoaphuoc',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoaphong',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoakhuong',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoanhon',render: $.fn.dataTable.render.number( ',', '.', 0 ) },
+                        { data: 'Hoaphu',render: $.fn.dataTable.render.number( ',', '.', 0 ) },                        
+
                         { data: 'update_date'},
                       //  { data: 'action', name: 'action', orderable: false, searchable: false, className : 'text-center', }
                      ],
@@ -111,48 +150,14 @@ function check_type(type) {
                   "url": "public/Vietnamese.json"
               },
 
+
             });
 
 
-            $('#table tbody').on( 'keyup', '.quantity', function () {
-                   var data = table.row( $(this).parents('tr') ).data();
-                   var oTable = $('#table').DataTable();
-                   var datatable = table
-                               .rows()
-                               .data();
-                    for (var i=0; i < datatable.length ;i++){
-                      if(i == data['id'] ){
-                        $('#quantity'+i).maskMoney({thousands: ',', decimal: '.', precision: 0});
-                        $('#quantity'+i).keypress(function(event){
-                                // console.log(event.which);
-                             if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
-                                 event.preventDefault();
-                             }});
 
-
-                        var value =$('#quantity'+i).val();
-                        var button_action = $("#button_action").val();
-                         //console.log(i,value);
-                                 $.ajax({
-                                     url:"{{ route('add_reportall') }}",
-                                     method:"POST",
-                                     data:{
-                                       id:i,
-                                       value:value,
-                                       button_action:button_action,
-                                       _token: '{{csrf_token()}}'
-                                     },
-                                     dataType:"JSON",
-                                     success:function(data)
-                                     {
-                                        console.log(data);
-                                     }
-                                 })
-                      }
-                    }
-               } );
 
           })
+
 
          $('#add_data').click(function(){
                 $('#group_customer').modal('show');
@@ -162,10 +167,13 @@ function check_type(type) {
                 $('.modal-title').text('Thêm mới');
 
             });
-          })
+
+       })
 
          </script>
 
    </body>
 </html>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

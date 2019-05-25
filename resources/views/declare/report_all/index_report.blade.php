@@ -48,7 +48,7 @@
                                    <th>STT</th>
                                    <th>Nội dung</th>
                                    <th>Số lượng</th>
-                                   <th>Cập nhật</th>
+                                   <th>Tháng</th>
                                    <!-- <th>Tác vụ</th> -->
                                  </tr>
                                </thead>
@@ -81,14 +81,25 @@ function check_type(type) {
 
 </script>
   <script type="text/javascript">
-  $('#quantity').maskMoney({thousands: ',', decimal: '.', precision: 0});
+      $('#quantity').maskMoney({thousands: ',', decimal: '.', precision: 0});
 
-  $("#quantity_input").keypress(function(event){
-          // console.log(event.which);
-       if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
-           event.preventDefault();
-   }});
+      $("#quantity_input").keypress(function(event){
+              // console.log(event.which);
+           if(event.which != 8 && isNaN(String.fromCharCode(event.which))){
+               event.preventDefault();
+       }});
+
+
        $(document).ready(function() {
+         var today = new Date();
+         var month1 = today.getMonth()+1;
+         var month = ("0" + month1).slice(-2);
+         var year  = today.getFullYear();
+         var value = month + '-'+ year;
+      //   console.log(month+'-'+ year);
+
+        $("#input_date_month").val(value);
+
          $('#input_date_month').datepicker({
             format: "mm-yyyy",
             viewMode: "months",
@@ -115,7 +126,7 @@ function check_type(type) {
                         { data: 'id', name: 'id' },
                         { data: 'name_content' },
                         { data: 'quantity'},
-                        { data: 'update_date'},
+                        { data: 'month'},
                       //  { data: 'action', name: 'action', orderable: false, searchable: false, className : 'text-center', }
                      ],
 
@@ -180,81 +191,6 @@ function check_type(type) {
 
             });
 
-
-                // Sửa
-                $(document).on('click', '.edit', function(){
-                    var id = $(this).attr("id");
-                    window.id = $(this).attr("id");
-                    $('#id').val(id);
-                    //  $('#form_output').html('');
-                    $.ajax({
-                        url:"{{route('edit_reportall')}}",
-                        method:'GET',
-                        data:{id:id, _token: '{{csrf_token()}}'},
-                        dataType:'JSON',
-                        success:function(data)
-                        {
-                           //console.log(data[0]);
-                            $('#code').val(data[0].code);
-                            $('#name').val(data[0].name);
-                            $('#price').val(data[0].price);
-                          //  $('#rollback').val(data[0].rollback);
-                          //  $('#is_cost').val(data[0].is_cost);
-
-                            if(data[0].rollback == 1){
-                                  $("#rollback").prop("checked", true);
-                              }else{  $("#rollback").prop("checked", false);}
-
-                            if(data[0].is_cost == 1){
-                                  $("#is_cost").prop("checked", true);
-                              }else{  $("#is_cost").prop("checked", false);}
-
-                            $('#description').val(data[0].description);
-                            $('#group_customer').modal('show');
-                            $('#action').val('Edit');
-                            $('.modal-title').text('Sửa dữ liệu');
-                            $('#button_action').val('update');
-                        }
-                    })
-                });
-                //Xóa
-                $(document).on('click', '.delete', function(){
-                   var id = $(this).attr("id");
-                   var table = $('#table').DataTable();
-                   table.rows().eq(0).each( function ( index ) {
-                       var row = table.row( index );
-                       var data = row.data();
-                       if(id == data['id']){
-                       //console.log(data['name']);
-                       window.name = data['name_delete'];
-                     }
-                   } );
-                   swal({
-                       title: "Bạn thật sự muốn xóa:",
-                       text: window.name,
-                       icon: "warning",
-                       buttons: true,
-                       dangerMode: true,
-                   })
-                   .then((willDelete) => {
-                       if (willDelete) {
-                         $.ajax({
-                           url:"{{route('delete_reportall')}}",
-                           method:'GET',
-                           data:{id:id, _token: '{{csrf_token()}}'},
-                           dataType:'JSON',
-                           success:function(data)
-                           {
-                             $('#table').DataTable().ajax.reload();
-                           }
-                         })
-                           swal("Đã xóa!", {
-                               icon: "success",
-                           });
-                       }
-                   });
-
-                })
        })
 
          </script>

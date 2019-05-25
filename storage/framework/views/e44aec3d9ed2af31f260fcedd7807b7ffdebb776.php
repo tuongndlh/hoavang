@@ -94,7 +94,7 @@ function check_type(type) {
                processing: true,
                serverSide: true,
                ajax: {
-                        url : '<?php echo url('reportall_ajax'); ?>',
+                        url : '<?php echo url('reportinput_ajax'); ?>',
                     },
                columns: [
                         { data: 'id', name: 'id' },
@@ -153,7 +153,6 @@ function check_type(type) {
 
           })
 
-
          $('#add_data').click(function(){
                 $('#group_customer').modal('show');
                 $('#group_customer_form')[0].reset();
@@ -162,83 +161,7 @@ function check_type(type) {
                 $('.modal-title').text('Thêm mới');
 
             });
-
-
-                // Sửa
-                $(document).on('click', '.edit', function(){
-                    var id = $(this).attr("id");
-                    window.id = $(this).attr("id");
-                    $('#id').val(id);
-                    //  $('#form_output').html('');
-                    $.ajax({
-                        url:"<?php echo e(route('edit_reportall')); ?>",
-                        method:'GET',
-                        data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
-                        dataType:'JSON',
-                        success:function(data)
-                        {
-                           //console.log(data[0]);
-                            $('#code').val(data[0].code);
-                            $('#name').val(data[0].name);
-                            $('#price').val(data[0].price);
-                          //  $('#rollback').val(data[0].rollback);
-                          //  $('#is_cost').val(data[0].is_cost);
-
-                            if(data[0].rollback == 1){
-                                  $("#rollback").prop("checked", true);
-                              }else{  $("#rollback").prop("checked", false);}
-
-                            if(data[0].is_cost == 1){
-                                  $("#is_cost").prop("checked", true);
-                              }else{  $("#is_cost").prop("checked", false);}
-
-                            $('#description').val(data[0].description);
-                            $('#group_customer').modal('show');
-                            $('#action').val('Edit');
-                            $('.modal-title').text('Sửa dữ liệu');
-                            $('#button_action').val('update');
-                        }
-                    })
-                });
-                //Xóa
-                $(document).on('click', '.delete', function(){
-                   var id = $(this).attr("id");
-                   var table = $('#table').DataTable();
-                   table.rows().eq(0).each( function ( index ) {
-                       var row = table.row( index );
-                       var data = row.data();
-                       if(id == data['id']){
-                       //console.log(data['name']);
-                       window.name = data['name_delete'];
-                     }
-                   } );
-                   swal({
-                       title: "Bạn thật sự muốn xóa:",
-                       text: window.name,
-                       icon: "warning",
-                       buttons: true,
-                       dangerMode: true,
-                   })
-                   .then((willDelete) => {
-                       if (willDelete) {
-                         $.ajax({
-                           url:"<?php echo e(route('delete_reportall')); ?>",
-                           method:'GET',
-                           data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
-                           dataType:'JSON',
-                           success:function(data)
-                           {
-                             $('#table').DataTable().ajax.reload();
-                           }
-                         })
-                           swal("Đã xóa!", {
-                               icon: "success",
-                           });
-                       }
-                   });
-
-                })
-       })
+          })
 
          </script>
 

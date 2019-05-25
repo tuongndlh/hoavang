@@ -10,8 +10,11 @@
     <li class="navigation-header"><span>Khai báo</span> </li>
     <li class="nav-item">
       <a class="nav-link"  href="{{ route('reportall') }}"><i class="fas fa-keyboard"></i>Nhập báo cáo</a>
-      <a class="nav-link"  href="{{ route('class') }}"><i class="far fa-eye"></i>Xem báo cáo</a>
-    </li>
+      <a class="nav-link"  href="{{ route('report') }}"><i class="far fa-eye"></i>Xem báo cáo</a>
+        @if(Auth::user()->id == 1 )
+      <a class="nav-link"  href="{{ route('admin_report') }}"><i class="fas fa-laptop-medical"></i>Xem báo cáo tất cả</a>
+      @endif
+      </li>
 
         <div>
           &nbsp;

@@ -26,7 +26,7 @@ class ReportAllController extends Controller
 
 
 
-    public function Get_Report_All(Request $request)
+    public function Get_Report_Input(Request $request)
     {
          //$Report_All = ReportAll::select();
      $input = $request->all();
@@ -88,14 +88,18 @@ class ReportAllController extends Controller
                 $ReportAllInput->save();
 
               }else{
-              // print_r($query);die;
-
-                    ReportAllInput::where('report_all_id', $input['id'])
-                    ->update([
-                             'quantity' => str_replace(",","",$input['value']),
-                             'update_by' => Auth::user()->id,
-                             'update_date' => Create_dateVN()
-                           ]);
+                $month =   date('m').'-'.date('Y');
+                $user_id = Auth::user()->id;
+                $report_all_id = $input['id'];
+                //  print_r($month,$user_id,$report_all_id);die;
+                ReportAllInput::where('report_all_id', $report_all_id)
+                  ->where('user_id',$user_id)
+                  ->where('month', $month)
+                  ->update([
+                           'quantity' => str_replace(",","",$input['value']),
+                           'update_by' => Auth::user()->id,
+                           'update_date' => Create_dateVN()
+                         ]);
               }
 
                 ReportAll::where('id', $input['id'])

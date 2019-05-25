@@ -19,7 +19,6 @@ class ViewReportAllController extends Controller
      */
     public function index()
     {
-
       return view('declare.report_all.index_report');
     }
 
@@ -33,11 +32,18 @@ class ViewReportAllController extends Controller
      $input['input_date_month'] != null ? $input_date_month = 'and t2.month ='."'".$input['input_date_month']."'" : $input_date_month = '';
      $company_id =Session::get('company_id');
 
-     $query =  "select t1.id, t1.name_content,t1.parent_id, t2.quantity, t1.update_date from hv_report_all t1
-                    left join hv_report_input t2 on t2.report_all_id = t1.id
-                    where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month ORDER BY t1.id";
+     // $query =  "SELECT t1.id, t1.name_content,t1.parent_id, t2.quantity, t2.month from hv_report_all t1
+     //                left join hv_report_input t2 on t2.report_all_id = t1.id
+     //                where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month ORDER BY t1.id";
+     $query =  "SELECT * from (
+                SELECT t1.id, t1.name_content,t1.parent_id, t2.quantity, t2.month from hv_report_all t1 left join hv_report_input t2 on t2.report_all_id = t1.id
+                where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month
+                UNION All
+                SELECT id, name_content,parent_id,''quantity, '' month from hv_report_all where parent_id is null
+                )k ORDER BY  k.id";
+
     $Report_All = DB::select($query);
-    print_r($query );die;
+    //print_r($query );die;
      return Datatables::of($Report_All)
 
      ->addColumn('name_content', function($Report_All){
@@ -49,63 +55,108 @@ class ViewReportAllController extends Controller
      $Report_All->parent_id != null ? $quantity = number_format_drop_zero_decimals($Report_All->quantity,3) : $quantity = null;
     return $quantity;
   })
-  ->addColumn('update_date', function($Report_All){
-    $Report_All->parent_id != null ? $update_date = $Report_All->update_date :
-                                     $update_date = '';
-   return $update_date;
+  ->addColumn('month', function($Report_All){
+    $Report_All->parent_id != null ? $month = $Report_All->month :
+                                     $month = '';
+   return $month;
 
  })
 
-     ->rawColumns(['name_content','quantity','update_date'])
+     ->rawColumns(['name_content','quantity','month'])
      ->editColumn('id', '{{$id}}')
      ->setRowId('id')
      ->make(true);
     }
 
-    function AddData(Request $request)
+    public function Get_Admin_Report_All(Request $request)
     {
-        //  print_r($request->all());die;
-              $input = $request->all();
-              $query  = ReportAllInput::where('report_all_id',$input['id'])
-              ->where('user_id', Auth::user()->id)
-              ->where('month', date('m').'-'.date('Y'))
-              ->first();
-            //  print_r($query);die;
-              if(!isset($query)){
-                $ReportAllInput = new ReportAllInput([
-                    'user_id'        =>  Auth::user()->id,
-                    'report_all_id'  =>  $input['id'],
-                    'quantity'       =>  str_replace(",","",$input['value']),
-                    'month'          =>  date('m').'-'.date('Y'),
-                    'update_date'    =>  Create_dateVN(),
-                    'create_date'    =>  Create_dateVN(),
-                    'create_by'      =>  Auth::user()->id,
-                    'company_id'     =>  Session::get('company_id'),
-                ]);
-                $ReportAllInput->save();
+         //$Report_All = ReportAll::select();
+     $input = $request->all();
+     $user_id = Auth::user()->id;
+     $input['input_date_month'] != null ? $input_date_month = 'and t2.month ='."'".$input['input_date_month']."'" : $input_date_month = '';
+     $company_id =Session::get('company_id');
 
-              }else{
-              // print_r($query);die;
-                $month =   "'".date('m').'-'.date('Y')."'";
+     // $query =  "SELECT t1.id, t1.name_content,t1.parent_id, t2.quantity, t2.month from hv_report_all t1
+     //                left join hv_report_input t2 on t2.report_all_id = t1.id
+     //                where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month ORDER BY t1.id";
+     $query =  "SELECT * from (
+                SELECT t1.id, t1.name_content,t1.parent_id, t2.quantity, t2.month from hv_report_all t1 left join hv_report_input t2 on t2.report_all_id = t1.id
+                where t1.company_id = $company_id and t2.user_id = $user_id $input_date_month
+                UNION All
+                SELECT id, name_content,parent_id,''quantity, '' month from hv_report_all where parent_id is null
+                )k ORDER BY  k.id";
 
-                ReportAllInput::where('report_all_id', $input['id'])
-                  ->where('user_id', Auth::user()->id)
-                  ->where('month', $month)
-                  ->update([
-                           'quantity' => str_replace(",","",$input['value']),
-                           'update_by' => Auth::user()->id,
-                           'update_date' => Create_dateVN()
-                         ]);
+    $Report_All = DB::select($query);
+    //print_r($query );die;
+     return Datatables::of($Report_All)
 
-              }
+     ->addColumn('name_content', function($Report_All){
+       $Report_All->parent_id != null ? $name_content = '<span>'.$Report_All->name_content.'</span>' :
+                                        $name_content = '<span class="label label-success">'.$Report_All->name_content.'</span>';
+      return $name_content;
+    })
+    ->addColumn('quantity', function($Report_All){
+     $Report_All->parent_id != null ? $quantity = number_format_drop_zero_decimals($Report_All->quantity,3) : $quantity = null;
+    return $quantity;
+    })
+    ->addColumn('month', function($Report_All){
+    $Report_All->parent_id != null ? $month = $Report_All->month :
+                                     $month = '';
+    return $month;
 
-                ReportAll::where('id', $input['id'])
-                ->update([
-                         'update_date' =>  Create_dateVN(),
-                       ]);
+    })
 
-              return response()->json('success');
+     ->rawColumns(['name_content','quantity','month'])
+     ->editColumn('id', '{{$id}}')
+     ->setRowId('id')
+     ->make(true);
     }
+    // function AddData(Request $request)
+    // {
+    //     //  print_r($request->all());die;
+    //           $input = $request->all();
+    //           $query  = ReportAllInput::where('report_all_id',$input['id'])
+    //           ->where('user_id', Auth::user()->id)
+    //           ->where('month', date('m').'-'.date('Y'))
+    //           ->first();
+    //         //  print_r($query);die;
+    //           if(!isset($query)){
+    //             $ReportAllInput = new ReportAllInput([
+    //                 'user_id'        =>  Auth::user()->id,
+    //                 'report_all_id'  =>  $input['id'],
+    //                 'quantity'       =>  str_replace(",","",$input['value']),
+    //                 'month'          =>  date('m').'-'.date('Y'),
+    //                 'update_date'    =>  Create_dateVN(),
+    //                 'create_date'    =>  Create_dateVN(),
+    //                 'create_by'      =>  Auth::user()->id,
+    //                 'company_id'     =>  Session::get('company_id'),
+    //             ]);
+    //             $ReportAllInput->save();
+    //
+    //           }else{
+    //           // print_r($query);die;
+    //             $month =   "'".date('m').'-'.date('Y')."'";
+    //             $user_id = Auth::user()->id;
+    //             $report_all_id = $input['id'];
+    //             //  print_r($month,$user_id,$report_all_id);die;
+    //             ReportAllInput::where('report_all_id', $report_all_id)
+    //               ->where('user_id',$user_id)
+    //               ->where('month', $month)
+    //               ->update([
+    //                        'quantity' => str_replace(",","",$input['value']),
+    //                        'update_by' => Auth::user()->id,
+    //                        'update_date' => Create_dateVN()
+    //                      ]);
+    //
+    //           }
+    //
+    //             ReportAll::where('id', $input['id'])
+    //             ->update([
+    //                      'update_date' =>  Create_dateVN(),
+    //                    ]);
+    //
+    //           return response()->json('success');
+    // }
 
 
 }
