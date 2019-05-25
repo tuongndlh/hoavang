@@ -13,14 +13,14 @@
     <title>HoaHong</title>
 
     <!-- Icons -->
-    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('public/css/simple-line-icons.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('public/css/font-awesome.min.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(asset('public/css/simple-line-icons.css')); ?>" rel="stylesheet">
 
     <!-- Main styles for this application -->
-    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('public/css/style.css')); ?>" rel="stylesheet">
 
     <!-- Styles required by this views -->
-    <link href="{{ asset('public/css/custom.css') }}" rel="stylesheet">
+    <link href="<?php echo e(asset('public/css/custom.css')); ?>" rel="stylesheet">
 
 </head>
 
@@ -33,12 +33,13 @@
                     <div class="card-body">
                         <h1>Đăng nhập</h1>
                         <p class="text-muted">Đăng nhập vào tài khoản</p>
-                        <form method="POST" action="{{ route('login') }}">
+                        <form method="POST" action="<?php echo e(route('login')); ?>">
 
-                            {{ csrf_field() }}
+                            <?php echo e(csrf_field()); ?>
+
                             <div class="input-group mb-3">
                                 <span class="input-group-addon"><i class="icon-user"></i></span>
-                                <input type="text" name="email" value="{{ old('email') }}" class="form-control" required
+                                <input type="text" name="email" value="<?php echo e(old('email')); ?>" class="form-control" required
                                        autofocus placeholder="email">
                             </div>
                             <div class="input-group mb-4">
@@ -62,7 +63,7 @@
                         <div>
                             <h2>Đăng ký</h2>
                             <p>Đăng ký tài khoản BizApp.</p>
-                            <a href="{{ route('register') }}" class="btn btn-primary active mt-3">Đăng ký ngay!</a>
+                            <a href="<?php echo e(route('register')); ?>" class="btn btn-primary active mt-3">Đăng ký ngay!</a>
                         </div>
                     </div>
                 </div> -->
@@ -72,9 +73,9 @@
 </div>
 
 <!-- Bootstrap and necessary plugins -->
-<script src="{{ asset('public/js/vendor/jquery.min.js') }}"></script>
-<script src="{{ asset('public/js/vendor/popper.min.js') }}"></script>
-<script src="{{ asset('public/js/vendor/bootstrap.min.js') }}"></script>
+<script src="<?php echo e(asset('public/js/vendor/jquery.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/js/vendor/popper.min.js')); ?>"></script>
+<script src="<?php echo e(asset('public/js/vendor/bootstrap.min.js')); ?>"></script>
 
 </body>
 </html>

@@ -1,8 +1,9 @@
-<?php $__env->startSection('content'); ?>
+@extends('master')
+@section('content')
 <html lang="en">
 <head>
-      <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
-      <script src="<?php echo e(asset('public/maskmoney/jquery.maskMoney.js')); ?>"></script>
+      <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
+      <script src="{{ asset('public/maskmoney/jquery.maskMoney.js') }}"></script>
 </head>
 
 <body>
@@ -17,7 +18,7 @@
         <ol class="breadcrumb">
          <!-- <li class="breadcrumb-item">Home</li> -->
          <li class="breadcrumb-item"><a href="/hoahong"><i class="fa far fa-arrow-circle-left"></i> Trang chủ</a></li>
-         <li class="breadcrumb-item active" href="<?php echo e(route('child')); ?>">Danh sách các cháu</li>
+         <li class="breadcrumb-item active" href="{{route('child')}}">Danh sách các cháu</li>
        </ol>
       <div class="content-header">
           <div class="panel panel-flat">
@@ -27,9 +28,9 @@
                  <select class="select custom-select" id="name_class" data-width="100%"  data-placeholder="">
 
                    <option value="0">Tất cả </option>
-                   <?php $__currentLoopData = $class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                         <option value="<?php echo e($group_item->id); ?>"><?php echo e($group_item->name); ?></option>
-                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                   @foreach ($class as $group_item)
+                         <option value="{{ $group_item->id}}">{{ $group_item->name}}</option>
+                     @endforeach
                  </select>
                </div>
             </div>
@@ -160,7 +161,7 @@ var allUsersTable =   $('#table').DataTable({
                  processing: true,
                  serverSide: true,
                  ajax: {
-                        url :   '<?php echo route('dayoff_ajax'); ?>',
+                        url :   '{!! route('dayoff_ajax') !!}',
                         data: function(d){
                             d.level =   $('#name_class').val()
                         }
@@ -215,13 +216,13 @@ var allUsersTable =   $('#table').DataTable({
                     var dayoff = $("#dayoff_input").val();
                     var button_action = $("#button_action").val();
                    $.ajax({
-                       url:"<?php echo e(route('add_dayoff')); ?>",
+                       url:"{{route('add_dayoff')}}",
                        method:'POST',
                        data:{
                          id:window.id,
                          dayoff:dayoff,
                          button_action:button_action,
-                          _token: '<?php echo e(csrf_token()); ?>'},
+                          _token: '{{csrf_token()}}'},
 
                         dataType:'JSON',
                        success:function(data)
@@ -239,9 +240,9 @@ var allUsersTable =   $('#table').DataTable({
                     window.id = $(this).attr("id");;
                 //  $('#dayoff_form').html('');
                   $.ajax({
-                      url:"<?php echo e(route('edit_dayoff')); ?>",
+                      url:"{{route('edit_dayoff')}}",
                       method:'GET',
-                      data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
+                      data:{id:id, _token: '{{csrf_token()}}'},
                       dataType:'JSON',
                       success:function(data)
                       {
@@ -261,14 +262,14 @@ var allUsersTable =   $('#table').DataTable({
                          var description = $("#description").val();
                          var button_action = $("#button_action").val();
                         $.ajax({
-                            url:"<?php echo e(route('add_discount')); ?>",
+                            url:"{{route('add_discount')}}",
                             method:'POST',
                             data:{
                                id:window.child_id,
                               discount:discount,
                               description:description,
                               button_action:button_action,
-                               _token: '<?php echo e(csrf_token()); ?>'},
+                               _token: '{{csrf_token()}}'},
 
                              dataType:'JSON',
                             success:function(data)
@@ -287,9 +288,9 @@ var allUsersTable =   $('#table').DataTable({
                          window.child_id = $(this).attr("id");;
                         // alert(id);
                        $.ajax({
-                           url:"<?php echo e(route('edit_discount')); ?>",
+                           url:"{{route('edit_discount')}}",
                            method:'GET',
-                           data:{id:id, _token: '<?php echo e(csrf_token()); ?>'},
+                           data:{id:id, _token: '{{csrf_token()}}'},
                            dataType:'JSON',
                            success:function(data)
                            {
@@ -308,6 +309,4 @@ var allUsersTable =   $('#table').DataTable({
 
    </body>
 </html>
-<?php $__env->stopSection(); ?>
-
-<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

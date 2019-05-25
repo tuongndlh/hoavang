@@ -31,16 +31,16 @@
     -->
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-        @if (Auth::check())
-          <!-- <img src="https://www.gravatar.com/avatar/{{md5(strtolower(trim(Auth::user()->email)))}}?s=160&d=retro" class="img-avatar" alt="{{ Auth::user()->email }}"> -->
-          <img src="{{ asset('public/img/avatars/37.jpg') }}" class="img-avatar" alt="{{ Auth::user()->email }}">
-        @else
-          <img src="{{ asset('img/avatars/6.jpg') }}" class="img-avatar" alt="admin@bootstrapmaster.com">
-        @endif
+        <?php if(Auth::check()): ?>
+          <!-- <img src="https://www.gravatar.com/avatar/<?php echo e(md5(strtolower(trim(Auth::user()->email)))); ?>?s=160&d=retro" class="img-avatar" alt="<?php echo e(Auth::user()->email); ?>"> -->
+          <img src="<?php echo e(asset('public/img/avatars/37.jpg')); ?>" class="img-avatar" alt="<?php echo e(Auth::user()->email); ?>">
+        <?php else: ?>
+          <img src="<?php echo e(asset('img/avatars/6.jpg')); ?>" class="img-avatar" alt="admin@bootstrapmaster.com">
+        <?php endif; ?>
       </a>
       <div class="dropdown-menu dropdown-menu-right">
         <div class="dropdown-header text-center">
-          <strong>{{ auth()->user()->fullname }}</strong>
+          <strong><?php echo e(auth()->user()->fullname); ?></strong>
         </div>
        <!-- <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
         <a class="dropdown-item" href="#"><i class="fa fa-envelope-o"></i> Messages<span class="badge badge-success">42</span></a>
@@ -56,7 +56,7 @@
         <div class="divider"></div>
         <a class="dropdown-item" href="#"><i class="fa fa-shield"></i> Lock Account</a> -->
 
-        <a class="dropdown-item" href="{{ route('logout') }}"
+        <a class="dropdown-item" href="<?php echo e(route('logout')); ?>"
           onclick="event.preventDefault();
           document.getElementById('logout-form').submit();">
           <i class="fa fa-lock"></i> Logout </a>
@@ -68,7 +68,8 @@
     <span class="navbar-toggler-icon"></span>
   </button> -->
 
- <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-  {{ csrf_field() }}
+ <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" style="display: none;">
+  <?php echo e(csrf_field()); ?>
+
 </form>
 </header>

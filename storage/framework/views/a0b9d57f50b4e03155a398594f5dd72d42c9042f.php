@@ -1,11 +1,8 @@
-
-
-@extends('master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <html lang="en">
 <head>
         <!-- <script src="//code.jquery.com/jquery.js"></script> -->
-            <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
+            <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
 </head>
 	<body>
 		<section class="content">
@@ -17,7 +14,8 @@
 		       </ol>
           </div>
            <div class="col-md-12">
-              		{!! Create_Session() !!}
+              		<?php echo Create_Session(); ?>
+
 
                   <!-- Emp Max -->
     						<div class="col-lg-3">
@@ -62,4 +60,6 @@
 
    	</body>
 </html>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

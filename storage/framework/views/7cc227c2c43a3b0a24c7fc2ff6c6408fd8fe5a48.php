@@ -1,9 +1,8 @@
-@extends('master')
-@section('content')
+<?php $__env->startSection('content'); ?>
 <html lang="en">
 <head>
-      <script src="{{ asset('public/js/jquery-3.2.1.js') }}"></script>
-      <script src="{{ asset('public/maskmoney/jquery.maskMoney.js') }}"></script>
+      <script src="<?php echo e(asset('public/js/jquery-3.2.1.js')); ?>"></script>
+      <script src="<?php echo e(asset('public/maskmoney/jquery.maskMoney.js')); ?>"></script>
       <style>
       .title {
         border-style: solid;
@@ -28,7 +27,7 @@
         <ol class="breadcrumb">
          <!-- <li class="breadcrumb-item">Home</li> -->
          <li class="breadcrumb-item"><a href="/hoahong"><i class="fa far fa-arrow-circle-left"></i> Trang chủ</a></li>
-         <li class="breadcrumb-item active" href="{{route('child')}}">Thống kê & In phiếu</li>
+         <li class="breadcrumb-item active" href="<?php echo e(route('child')); ?>">Thống kê & In phiếu</li>
        </ol>
           <div class="content-header">
              <div class="panel panel-flat">
@@ -45,9 +44,9 @@
                            <div class="col-sm-2">
                            <select class="select custom-select" id="name_class" data-width="100%"  data-placeholder="">
                              <option value="0">Tất cả </option>
-                             @foreach ($class as $group_item)
-                                   <option value="{{ $group_item->id}}">{{ $group_item->name}}</option>
-                               @endforeach
+                             <?php $__currentLoopData = $class; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $group_item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                   <option value="<?php echo e($group_item->id); ?>"><?php echo e($group_item->name); ?></option>
+                               <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                            </select>
                          </div>
                       </div>
@@ -98,7 +97,7 @@
     <div class="row" >
 
           <div style=" margin-top:15px;">
-                <img src="{{ asset('public/img/logo.png') }}" class="img-thumbnail profile_ detail"
+                <img src="<?php echo e(asset('public/img/logo.png')); ?>" class="img-thumbnail profile_ detail"
                 width="150">
           </div>
 
@@ -107,7 +106,7 @@
         <b><h2> MẪU GIÁO HOA HỒNG </h2></b>
     </div>
     <div style="text-align:center;">
-      THÔNG BÁO THU TIỀN THÁNG <b> {!!date('m')!!} / {!!date('Y')!!}</b>
+      THÔNG BÁO THU TIỀN THÁNG <b> <?php echo date('m'); ?> / <?php echo date('Y'); ?></b>
     </div>
     <div style="margin-top:10px;">
       Kính gởi phụ huynh cháu: <b> <label id="name_child" name="name_child"/></b>
@@ -131,7 +130,7 @@
       Tổng tiền: <b><label id="total_amount" name="total_amount"/></b>
     </div>
     <div style="text-align:right;">
-      <i>Ngày {!!date('d')!!}  tháng {!!date('m')!!}  năm {!!date('Y')!!}</i>
+      <i>Ngày <?php echo date('d'); ?>  tháng <?php echo date('m'); ?>  năm <?php echo date('Y'); ?></i>
     </div>
     <div style="text-align:right; margin:5px; margin-right:50px; margin-bottom:80px;">
       Chủ nhóm
@@ -153,7 +152,7 @@
                  processing: true,
                  serverSide: true,
                  ajax: {
-                        url :   '{!! route('Print_ajax') !!}',
+                        url :   '<?php echo route('Print_ajax'); ?>',
                         data: function(d){
                             d.level =   $('#name_class').val()
                         }
@@ -205,7 +204,7 @@
                 var divToPrint=document.getElementById('print_report');
                 var newWin=window.open('','Print-Window');
                         $.ajax({
-                                  url:"{{ route('Print_report_before') }}",
+                                  url:"<?php echo e(route('Print_report_before')); ?>",
                                   method:"post",
                                   data:{
                                     child_id:child_id,
@@ -216,7 +215,7 @@
                                     day_off:day_off,
                                     discount:discount,
                                     amount:amount,
-                                   _token: '{{csrf_token()}}'
+                                   _token: '<?php echo e(csrf_token()); ?>'
                                   },
                                   dataType:"json",
                                   success:function(data)
@@ -270,4 +269,6 @@
 
    </body>
 </html>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('master', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
